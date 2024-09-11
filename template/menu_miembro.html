@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+</head>
+<body>
+    <nav>
+        <div class="container__menu col-lg-12 col-sm-12">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="{{url_for('miembro')}}" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{ url_for('perfil') }}">Perfil</a></li>
+                                <li><a href="{{url_for('reservas_miembro')}}">Reservas</a></li>
+                                <li><a href="{{url_for('plan_de_trabajo_miembro')}}">Planes de trabajo</a></li>
+                                <li><a href="{{url_for('miembro_estado_membresia')}}">Membresia</a></li>
+                                <li><a href="{{url_for('proceso_plan_trabajo')}}">Mi proceso</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        
+                        <li class="admin">
+                            <li class="user"><img src="/static/img/ic_person.png" alt=""></li> 
+                            <h6>{{info_miembro[1]}}</h6>
+                        </li>
+                        
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </nav> 
+</body>
+</html>

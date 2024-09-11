@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Maquina</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+
+<body>
+    <!-- Barra de navegación -->
+    <header>
+        <div class="container__menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="{{url_for('miembro')}}" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{url_for('perfil')}}">Perfil</a></li>
+                                <li><a href="{{url_for('reservas_miembro')}}">Reservas</a></li>
+                                <li><a href="{{url_for('plan_de_trabajo_miembro')}}">Planes de trabajo</a></li>
+                                <li><a href="{{url_for('miembro_estado_membresia')}}">Membresia</a></li>
+                                <li><a href="{{url_for('proceso_plan_trabajo')}}">Mi proceso</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        <li class="admin">
+                            <h6>Miembro</h6>
+                        </li>
+
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <main id="tabla" class="d-flex align-items-center justify-content-center">
+        <div class="content-container">
+            <div class="col-md-11 p-4">
+                <form method="post">
+                    <table class="table table-striped table-bordered bg-white centrar-tabla">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora inicio</th>
+                                <th>Hora fin</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in rows %}
+                            <tr>
+                                <td>
+                                    <input type="date" name="fecha" required>
+                                </td>
+                                <td>
+                                    <input type="time" name="horainicio" required>
+                                </td>
+                                <td>
+                                    <input type="time" name="horafin" required><br>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-success btn-block">Reservar</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+                <a href="{{ url_for('reservar_maquina') }}" class="btn btn-primary btn-block">Volver</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

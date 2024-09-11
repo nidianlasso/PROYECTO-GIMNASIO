@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Instructor</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+
+</head>
+
+<body class="admin_fondo">
+    <header>
+        <div class="container__menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{ url_for('gestion_usuarios') }}">Gestión de usuarios</a></li>
+                                <li><a href="{{ url_for('gestion_maquinas') }}">Gestión de máquinas</a></li>
+                                <li><a href="{{ url_for('gestion_nomina') }}">Gestión de nómina</a></li>
+                                <li><a href="{{ url_for('gestion_membresias') }}">Gestión de membresias</a></li>
+                                <li><a href="{{ url_for('gestion_instructores') }}">Gestión de instructores</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        <li class="admin">
+                            <h6>Admin</h6>
+                        </li>
+                        <li class="user"><img src="../static/img/ic_person.png" alt=""></li>
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <main id="tabla">
+        <div class="content-container">
+            <div class="col-md-10">
+                <legend class="fw-bold" style="text-align: center; font-size: 27px;">AGREGAR INSTRUCTOR</legend>
+                <form method="POST">
+                    <fieldset>
+                        <legend class="fw-bold" style="text-align: justify;">Información Personal</legend>
+                        <hr>
+                        <div class="form-group" style="text-align: left;">
+                        <label for="cedula">Cedula:</label>
+                        <input type="text" id="cedula" name="cedula" required class="form-control">
+
+                        <label for="nombre">Nombre de instructor:</label>
+                        <input type="text" id="nombre" name="nombre" required class="form-control">
+
+                        <label for="apellido">Apellido de instructor:</label>
+                        <input type="text" id="apellido" name="apellido" required class="form-control">
+
+                        <label for="genero">Género:</label>
+                        <select class="form-select" name="genero" id="genero">
+                            <option value="Masculino">Másculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" name="edad" required class="form-control">
+
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" name="correo" required class="form-control">
+
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" required class="form-control">
+
+                        <legend class="fw-bold mt-4">Especialidades</legend>
+                        <hr>
+
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="especialidad"
+                                value="Entrenamiento físico general" id="especialidad1">
+                            <label class="form-check-label" for="especialidad1">Entrenamiento físico general</label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="especialidad" value="Aerobicos"
+                                id="especialidad2">
+                            <label class="form-check-label" for="especialidad2">Aerobicos</label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="especialidad"
+                                value="Entrenamiento de fuerza" id="especialidad3">
+                            <label class="form-check-label" for="especialidad3">Entrenamiento de fuerza</label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="especialidad"
+                                value="Entrenamiento de flexibilidad" id="especialidad4">
+                            <label class="form-check-label" for="especialidad4">Entrenamiento de flexibilidad</label>
+                        </div>
+                    </fieldset>
+                    <legend class="fw-bold mt-4">Horario</legend>
+                    <hr>
+                    <label for="horario">Hora:</label>
+                    <select class="form-select" name="horario" id="horario">
+                        <option value="05am-01pm">05 AM - 01 PM</option>
+                        <option value="02pm-10pm">02 PM - 10 PM</option>
+                    </select>
+                    <br><br>
+
+                    <button type="submit" class="btn btn-primary btn-block" name="submit">Añadir Instructor</button>
+                    <a href="{{ url_for('gestion_instructores') }}" class="btn btn-primary btn-block">Volver</a>
+                </form>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

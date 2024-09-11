@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo</title>
+    <link rel="stylesheet" type="text/css" href="..\static\CSS\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+<body class="admin_fondo">
+    {% include 'menu_miembro.html' %}
+    <div>
+        <img class="img_user" style="margin-top: 50px; width: 10%;" src="/static/img/usuario_1010047173.png" alt="">
+
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+
+    <div id="tabla" style="width: 80%;">
+        <h3 class="edit_perfil" style="text-align: center; color: #000; padding: 3%;"> <b>MI PLAN DE TRABAJO</b> </h3>
+        <br>
+        <div class="content-container" >
+            <div class="col-md-12">
+                {% if rows %}
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th>Id_Plan</th>
+                            <th>Identificacion</th>
+                            <th class="ellipsis">Asignado por</th>
+                            <th class="ellipsis">Fecha de inicio</th>
+                            <th class="ellipsis">Fecha de finalizacion</th>
+                            <th class="ellipsis">Nombre del plan</th>
+                            <th class="ellipsis">Descripción del plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in rows %}
+                        <tr>
+                            <td>{{ p.2 }}</td>
+                            <td>{{ p.3 }}</td>
+                            <td>{{ p.8 }}</td>
+                            <td>{{ p.4 }}</td>
+                            <td>{{ p.5 }}</td>
+                            <td>{{ p.6 }}</td>
+                            <td>{{ p.7 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br><br>
+                <a href="{{ url_for('miembro') }}" class="btn btn-warning btn-block">Volver</a>
+                <br>
+                <br>
+                {% else %}
+                <p>No hay ningún plan de trabajo asignado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

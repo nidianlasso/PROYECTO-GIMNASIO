@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Maquina</title>
+  <link rel="stylesheet" type="text/css" href="../static/CSS/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+
+<body class="admin_fondo">
+
+  <header>
+    <div class="container__menu">
+      <div class="menu">
+        <nav>
+          <ul>
+            <li><a href="#" id="selected">Inicio</a></li>
+            <li><a href="#">Servicios</a>
+              <ul>
+                <li><a href="{{ url_for('gestion_usuarios') }}">Gestión de usuarios</a></li>
+                <li><a href="{{ url_for('gestion_maquinas') }}">Gestión de máquinas</a></li>
+                <li><a href="{{ url_for('gestion_nomina') }}">Gestión de nómina</a></li>
+                <li><a href="{{ url_for('gestion_membresias') }}">Gestión de membresias</a></li>
+                <li><a href="{{ url_for('gestion_instructores') }}">Gestión de instructores</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+            <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+            <li class="admin">
+              <h6>Admin</h6>
+            </li>
+            <li class="user"><img src="/static/img/ic_person.png" alt=""></li>
+            <li><a href="{{ url_for('login') }}"></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages%}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <main id="tabla" class="d-flex align-items-center justify-content-center">
+    <div class="content-container">
+      <div class="col-md-80 p-4">
+        <legend class="fw-bold" style="text-align: center; font-size: 27px;">AGREGAR MÁQUINA</legend>
+        <form method="POST">
+
+          <label for="nombre">Nombre de la máquina:</label>
+          <input type="text" id="nombre" name="nombre" required class="form-control">
+
+          <label for="estado">Estado:</label>
+          <select id="estado" name="estado" required class="form-control">
+            <option value="1">Buen estado</option>
+            <option value="0">Mal estado</option>
+          </select>
+
+          <label for="proveedor">Proveedor:</label>
+          <input type="text" id="proveedor" name="proveedor" required class="form-control">
+
+          <label for="precio">Precio:</label>
+          <input type="number" id="precio" name="precio" required class="form-control">
+
+          <label for="fechaCompra">Fecha de compra:</label>
+          <input type="date" id="fechaCompra" name="fechaCompra" required class="form-control" value="2018-07-22"
+            min="2000-01-01" max="2023-12-31">
+
+          <label for="disponibilidad">¿Disponible?:</label>
+          <select id="disponibilidad" name="disponibilidad" required class="form-control">
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+          </select>
+          <br><br>
+
+          <button type="submit" class="btn btn-primary btn-block">Añadir Máquina</button>
+          <a href="{{ url_for('gestion_maquinas') }}" class="btn btn-primary btn-block">Volver</a>
+        </form>
+      </div>
+    </div>
+    </div>
+  </main>
+</body>

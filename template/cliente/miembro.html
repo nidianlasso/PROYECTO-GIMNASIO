@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miembro</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="..\static\CSS\style.css">
+        <!-- Barra de navegación -->
+</head>
+
+
+<body class="admin_fondo">
+    {% include 'menu_miembro.html' %}
+    <div>
+        <div class="contendor-perfil" style="background: rgba(255, 255, 255, 0.5); padding: 5%; margin: 0px 20px 0px 20px ;">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div>
+                        <div class="image-container">
+                            <img class="img_user" src="/static/img/usuario_{{ info_miembro[0] }}.PNG" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                        <h2 class="title_perfil col-lg-12 col-sm-12" style="text-align: justify;">{{info_miembro[1]}} {{info_miembro[2]}}</h2> 
+                        <p class="datosP">Identificacion: <b>{{ info_miembro[0] }}</b></p>
+                        <p class="datosP">Correo: <b>{{ info_miembro[4] }}</b></p>
+                        <p class="datosP">Telefono: <b>{{ info_miembro[5] }}</b></p>
+                        <p class="datosP">Estado: <b>{% if info_miembro[7] == 1 %}
+                                Activo
+                                {% else %}
+                                Inactivo
+                                {% endif %}</b></p>
+                </div>
+            </div>
+        </div>
+
+    
+        <br>
+        
+
+        <main>
+            <h6><b>Clases Reservadas</b></h6>
+            <table class="table table-striped table-bordered bg-white centrar-tabla">
+                <thead>
+                    <tr>
+                        <th>Id_Clase</th>
+                        <th>Nombre</th>
+                        <th>Instructor</th>
+                        <th>Fecha de la clase</th>
+                        <th>Hora de inicio</th>
+                        <th>Hora de final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva[0] }}</td>
+                        <td>{{ reserva[1] }}</td>
+                        <td>{{ reserva[7] }}</td>
+                        <td>{{ reserva[3] }}</td>
+                        <td>{{ reserva[4] }}</td>
+                        <td>{{ reserva[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <main style="margin-top: 5px;">
+            <h6><b>Maquinas Reservadas</b></h6>
+            <table class="table table-striped table-bordered bg-white centrar-tabla">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservasm %}
+                    <tr>
+                        <td>{{ reserva[6] }}</td>
+                        <td>{{ reserva[3] }}</td>
+                        <td>{{ reserva[4] }}</td>
+                        <td>{{ reserva[5] }}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+
+</html>

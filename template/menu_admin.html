@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+</head>
+<body>
+    <header>
+        <div class="container__menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{ url_for('gestion_usuarios') }}">Gestión de usuarios</a></li>
+                                <li><a href="{{ url_for('gestion_maquinas') }}">Gestión de máquinas</a></li>
+                                <li><a href="{{ url_for('gestion_nomina') }}">Gestión de nómina</a></li>
+                                <li><a href="{{ url_for('gestion_membresias') }}">Gestión de membresias</a></li>
+                                <li><a href="{{ url_for('gestion_instructores') }}">Gestión de instructores</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        <li class="admin">
+                            <h6>Admin</h6>
+                        </li>
+                        <li class="user"><img src="/static/img/ic_person.png" alt=""></li>
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+</body>
+</html>

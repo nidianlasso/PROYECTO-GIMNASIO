@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" type="text/css" href="static\CSS\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+<body class="admin_fondo">
+    {% include 'menu_miembro.html' %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <div class="formulario_info">
+            <h1 class="edit_perfil">Información Personal</h1>
+            <hr>
+            <form action="/actualizar/{{info_miembro[0]}}" method="POST">
+                <h6><b>Nombre</b></h6>
+                <input class="campo" type="text" name="nombre" id="nombre" value="{{ info_miembro[1] }}">
+                <br>
+                <h6><b>Apellido</b></h6>
+                <input class="campo" type="text" name="apellido" id="apellido" value="{{ info_miembro[2] }}">
+                <br>
+                <h6><b>Edad</b></h6>
+                <input class="campo" type="text" name="edad" id="edad" value="{{ info_miembro[3] }}">
+                <br>
+                <h6><b>Telefono</b></h6>
+                <input class="campo" type="tel" name="telefono" id="telefono" value="{{ info_miembro[5] }}">
+                <br>
+                <h6><b>Correo electronico</b></h6>
+                <input class="campo" type="email" name="correo" id="correo" value="{{ info_miembro[4] }}">
+                <br>
+                <button type="submit" class="btn btn-primary ml-6">Actualizar Datos</button>
+                <a href="{{ url_for('perfil') }}" class="btn btn-primary btn-block">Volver</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

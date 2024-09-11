@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Membresia</title>
+    <link rel="stylesheet" type="text/css" href="..\static\CSS\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+
+<body>
+    <header>
+        <div class="container__menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{ url_for('gestion_usuarios') }}">Gestión de usuarios</a></li>
+                                <li><a href="{{ url_for('gestion_maquinas') }}">Gestión de máquinas</a></li>
+                                <li><a href="{{ url_for('gestion_nomina') }}">Gestión de nómina</a></li>
+                                <li><a href="{{ url_for('gestion_membresias') }}">Gestión de membresias</a></li>
+                                <li><a href="{{ url_for('gestion_instructores') }}">Gestión de instructores</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        <li class="admin">
+                            <h6>Admin</h6>
+                        </li>
+                        <li class="user"><img src="/static/img/ic_person.png" alt=""></li>
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <table id="tabla" class="tablaMembresia">
+        <tr class="titulos">
+            <th>IDENTIFICACION</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+            <th>ESTADO</th>
+            <th>ESTADO MEMBRESIA</th>
+            <th>FECHA INICIO</th>
+            <th>FECHA FIN</th>
+            <th>COSTO</th>
+            <th>TIPO DE MEMBRESIA</th>
+        </tr>
+        {% for m in miembro %}
+        <tr>
+            <td>{{ m.0 }}</td>
+            <td>{{ m.1 }}</td>
+            <td>{{ m.2 }}</td>
+            <td>{{ m.3 }}</td>
+            <td>{% if m[4] == 1 %}
+                Activo
+                {% else %}
+                Inactivo
+                {% endif %}</td>
+            <td>{% if m[5] == 1 %}
+                Activo
+                {% else %}
+                Inactivo
+                {% endif %}</td>
+            <td>{{ m.6 }}</td>
+            <td>{{ m.7 }}</td>
+            <td>{{ m.8 }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('vista_editar_membresia', cedula=m.0) }}">
+                    <select id="tipo" name="tipo" required class="form-control">
+                        <option value="1">Mensual</option>
+                        <option value="2">Anual</option>
+                        <option value="3">Semanal</option>
+                    </select>
+                    <input class="btn btn-secondary" type="submit" value="Editar Membresía">
+                </form>
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <div class="container__menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#" id="selected">Inicio</a></li>
+                        <li><a href="#">Servicios</a>
+                            <ul>
+                                <li><a href="{{ url_for('gestion_usuarios') }}">Gestión de usuarios</a></li>
+                                <li><a href="{{ url_for('gestion_maquinas') }}">Gestión de máquinas</a></li>
+                                <li><a href="{{ url_for('gestion_nomina') }}">Gestión de nómina</a></li>
+                                <li><a href="{{ url_for('gestion_membresias') }}">Gestión de membresias</a></li>
+                                <li><a href="{{ url_for('gestion_instructores') }}">Gestión de instructores</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('NOSOTROS') }}">Nosotros</a></li>
+                        <li><a href="{{ url_for('CONTACTOS') }}">Contactos</a></li>
+                        <li><a href="{{ url_for('login') }}"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <!-- Muestra mensajes flash, como la confirmación de que la cita se ha agendado -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <main id="tabla" class="d-flex align-items-center justify-content-center">
+        <div class="content-container">
+            <div class="col-md-80 p-4">
+                <form method="post">
+                    <table class="table table-striped table-bordered bg-white centrar-tabla">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Observación</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ maquina.0 }}</td>
+                                <td>{{ maquina.1 }}</td>
+                                <td>
+                                    {% if maquina[2] == 1 %}
+                                    BUEN ESTADO
+                                    {% else %}
+                                    MAL ESTADO
+                                    {% endif %}
+                                </td>
+                                <td><input type="date" name="fecha" required></td>
+                                <td><input type="time" name="hora" required></td>
+                                <td><input type="text" name="observacion" required></td>
+                                <td>
+                                    <button type="submit" class="btn btn-success">Agendar Cita</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <a href="{{ url_for('mantenimiento_maquinas') }}" class="btn btn-primary btn-block">Volver</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

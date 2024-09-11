@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado Membresia</title>
+    <link rel="stylesheet" type="text/css" href="static\CSS\style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+
+<body class="admin_fondo">
+    {% include 'menu_miembro.html' %}
+    <div>
+        <img class="img_user" style="margin-top: 50px; width: 10%;" src="/static/img/usuario_{{ info_miembro[0] }}.PNG" alt="">
+    </div>
+
+    <main id="tabla">
+        <legend class="fw-bold" style="text-align: center; font-size: 27px;">MI MEMBRESIA</legend> <br> <br>
+        <div class="content-container" style=" max-width: 80%;">
+            <div class="col-md-12 ">
+                {% if rows %}
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th>Id_Membresia</th>
+                            <th>Tipo</th>
+                            <th>Costo</th>
+                            <th class="ellipsis">Fecha de inicio</th>
+                            <th class="ellipsis">Fecha de finalizacion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in rows %}
+                        <tr>
+                            <td>{{ m[11] }}</td>
+                            <td>{{ m[12] }}</td>
+                            <td>{{ m[13] }}</td>
+                            <td>{{ m[14] }}</td>
+                            <td>{{ m[15] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+               
+            </div>
+        </div>
+        <br> <br>
+        <a href="{{ url_for('miembro') }}" class="btn btn-warning btn-block">Volver</a>
+        {% else %}
+        <p>No hay ningúna membresia activa</p>
+        <a href="{{ url_for('miembro') }}" class="btn btn-success btn-block">Volver</a>
+        {% endif %}
+    </main>
+</body>
+
+</html>
